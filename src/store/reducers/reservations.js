@@ -2,19 +2,19 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const reservationsSlice = createSlice({
     name: 'reservations',
-    initialState: ["Monstar"],
+    initialState: [],
     reducers: {
         addReservation: (reservations, action) => {
-            reservations.push(action.payload)
+            reservations.push({ // [ { ... }, { pushedReservation } ]
+                ...action.payload, // { name, id }
+                dateJoined: Date.now() // { name, id, dateJoined }
+            })
         },
-        removeReservation: (reservations, action) => {
-            reservations.splice(action.payload, 1)
-        },
-    }
+    },
 })
-export const { 
+
+export const {
     addReservation,
-    removeReservation
 } = reservationsSlice.actions;
 
 export default reservationsSlice.reducer;
